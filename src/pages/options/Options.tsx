@@ -1,24 +1,53 @@
-import { createSignal } from 'solid-js'
-import '@src/models/sites.ts'
+import { createSignal, onMount } from 'solid-js'
+import { Site } from '@src/models/sites'
+import { Work } from '@src/models/works'
+import SiteList from './SiteList'
 import HistoryList from './HistoryList'
 import Card from '@src/components/Card'
 
 const Options = () => {
   const [getBlockSiteUrl, setBlockSiteUrl] = createSignal<string>('')
+  const [getBlockedSites, setBlockedSites] = createSignal<Site[]>([])
+  const [getWorks, setWorks] = createSignal<Work[]>([])
   const handleChange = (event: Event): void => {
     if (!(event.target instanceof HTMLInputElement)) {
       return
     }
     setBlockSiteUrl(event.target.value as string)
   }
+
+  onMount(() => {
+    chrome.storage.local.get(
+      'blockedSites',
+      ({ blockedSites }: { blockedSites: Site[] }) => {
+        if (blockedSites) {
+          setBlockedSites(blockedSites)
+        }
+      }
+    )
+  })
+
   const addBlockSite = () => {
-    // const siteUrl = getBlockSiteUrl()
-    // if (siteUrl != '') {
-    //   chrome.storage.local.get('blockedSites', ({ blockedSites: Sites[] }) => {
-    //     blockedSites.push(siteUrl)
-    //     chrome.storage.local.set({ blockedSites })
-    //   })
-    // }
+    const siteUrl = getBlockSiteUrl()
+    if (siteUrl != '') {
+      chrome.storage.local.get(
+        'blockedSites',
+        ({ blockedSites }: { blockedSites: Site[] }) => {
+          const site: Site = {
+            name: siteUrl.replace('https://', '').replace('.com', ''),
+            url: siteUrl,
+          }
+          if (blockedSites === undefined) {
+            blockedSites = [site]
+          } else {
+            blockedSites.push(site)
+          }
+          // update sites
+          chrome.storage.local.set({ blockedSites })
+          setBlockedSites(blockedSites)
+        }
+      )
+    }
   }
 
   return (
@@ -39,14 +68,10 @@ const Options = () => {
         </div>
       </Card>
       <Card>
-        <h2>ブロックリスト</h2>
-        <div>{getBlockSiteUrl()}</div>
-        <button type="submit" id="remove">
-          削除
-        </button>
+        <SiteList sites={getBlockedSites()} />
       </Card>
       <div>
-        <HistoryList />
+        <HistoryList works={getWorks()} />
       </div>
     </div>
   )
