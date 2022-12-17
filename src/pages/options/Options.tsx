@@ -1,6 +1,7 @@
 import { createSignal } from 'solid-js'
 import '@src/models/sites.ts'
 import HistoryList from './HistoryList'
+import Card from '@src/components/Card'
 
 const Options = () => {
   const [getBlockSiteUrl, setBlockSiteUrl] = createSignal<string>('')
@@ -21,10 +22,10 @@ const Options = () => {
   }
 
   return (
-    <div>
-      <div>
+    <div class="flex flex-col gap-4 m-4">
+      <Card>
         <p>ブロック時間：</p>
-        <p>
+        <div>
           ブロックサイトの追加:
           <input
             type="text"
@@ -32,19 +33,18 @@ const Options = () => {
             size="60"
             onChange={handleChange}
           />
-        </p>
-        <button type="submit" onClick={addBlockSite}>
-          保存
-        </button>
-      </div>
-      <div>
+          <button class="p-2 bg-blue-600 text-white" onClick={addBlockSite}>
+            保存
+          </button>
+        </div>
+      </Card>
+      <Card>
         <h2>ブロックリスト</h2>
         <div>{getBlockSiteUrl()}</div>
         <button type="submit" id="remove">
           削除
         </button>
-      </div>
-      m
+      </Card>
       <div>
         <HistoryList />
       </div>
