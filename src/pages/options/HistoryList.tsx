@@ -1,4 +1,4 @@
-import { createSignal, createMemo } from 'solid'
+import { createSignal, createMemo } from 'solid-js'
 import '@src/models/sites.ts'
 
 const HistoryList = () => {

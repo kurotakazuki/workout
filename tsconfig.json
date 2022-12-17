@@ -10,7 +10,23 @@
     "jsxImportSource": "solid-js",
     "types": ["vite/client"],
     "noEmit": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "paths": {
+      "@src/*": [
+        "./src/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@pages/*": [
+        "./src/pages/*"
+      ]
+    }
   },
-  "exclude": ["dist", "node_modules"]
+  "include": [
+    "src",
+    "utils",
+    "vite.config.ts",
+    "node_modules/@types"
+  ]
 }

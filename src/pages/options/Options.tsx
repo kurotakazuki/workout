@@ -23,24 +23,23 @@ const Options = () => {
   return (
     <div>
       <div>
-        <form>
-          <p>ブロック時間：</p>
-          <p>
-            ブロックサイトの追加:
-            <input
-              type="text"
-              id="new-block-site"
-              size="60"
-              onChange={handleChange}
-            />
-          </p>
-          <button type="submit" onClick={addBlockSite}>
-            保存
-          </button>
-        </form>
+        <p>ブロック時間：</p>
+        <p>
+          ブロックサイトの追加:
+          <input
+            type="text"
+            id="new-block-site"
+            size="60"
+            onChange={handleChange}
+          />
+        </p>
+        <button type="submit" onClick={addBlockSite}>
+          保存
+        </button>
       </div>
       <div>
         <h2>ブロックリスト</h2>
+        <div>{getBlockSiteUrl()}</div>
         <button type="submit" id="remove">
           削除
         </button>
