@@ -3,5 +3,7 @@
   "name": "Workout",
   "version": "1.0.0",
   "action": { "default_popup": "index.html" },
-  "background": { "service_worker": "src/pages/background/index.ts" }
+  "background": { "service_worker": "src/pages/background/index.ts" },
+  "options_page": "src/pages/options/index.html"
+
 }
