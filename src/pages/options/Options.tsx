@@ -27,31 +27,50 @@ const Options = () => {
     )
   })
 
+  const toggleWorking = () => {
+    chrome.storage.local.get('working', ({ working }: { working: boolean }) => {
+      working = !working
+      chrome.storage.local.set({ working })
+      alert(working)
+    })
+  }
+
   const addBlockSite = () => {
-    const siteUrl = getBlockSiteUrl()
-    if (siteUrl != '') {
-      chrome.storage.local.get(
-        'blockedSites',
-        ({ blockedSites }: { blockedSites: Site[] }) => {
-          const site: Site = {
-            name: siteUrl.replace('https://', '').replace('.com', ''),
-            url: siteUrl,
+    try {
+      new URL(getBlockSiteUrl())
+      const siteUrl = getBlockSiteUrl()
+
+      if (siteUrl != '') {
+        chrome.storage.local.get(
+          'blockedSites',
+          ({ blockedSites }: { blockedSites: Site[] }) => {
+            const site: Site = {
+              name: siteUrl.replace('https://', '').replace('.com', ''),
+              url: siteUrl,
+            }
+            if (blockedSites === undefined) {
+              blockedSites = [site]
+            } else {
+              blockedSites.push(site)
+            }
+            // update sites
+            chrome.storage.local.set({ blockedSites })
+            setBlockedSites(blockedSites)
           }
-          if (blockedSites === undefined) {
-            blockedSites = [site]
-          } else {
-            blockedSites.push(site)
-          }
-          // update sites
-          chrome.storage.local.set({ blockedSites })
-          setBlockedSites(blockedSites)
-        }
-      )
+        )
+      }
+    } catch (err) {
+      alert('不正なURL')
     }
   }
 
   return (
     <div class="flex flex-col gap-4 m-4">
+      <Card>
+        <button class="p-2 bg-blue-600 text-white" onClick={toggleWorking}>
+          作業中
+        </button>
+      </Card>
       <Card>
         <p>ブロック時間：</p>
         <div>
@@ -70,9 +89,9 @@ const Options = () => {
       <Card>
         <SiteList sites={getBlockedSites()} />
       </Card>
-      <div>
+      <Card>
         <HistoryList works={getWorks()} />
-      </div>
+      </Card>
     </div>
   )
 }
