@@ -1,6 +1,7 @@
 {
-    "manifest_version": 3,
-    "name": "Workout",
-    "version": "1.0.0",
-    "action": { "default_popup": "index.html" }
+  "manifest_version": 3,
+  "name": "Workout",
+  "version": "1.0.0",
+  "action": { "default_popup": "index.html" },
+  "background": { "service_worker": "src/pages/background/index.ts" }
 }
