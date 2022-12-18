@@ -5,8 +5,8 @@ import '@src/models/sites.ts'
 const HistoryList = (props: { works: Work[] }) => {
   return (
     <div>
-      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <table class="list-table">
+        <thead class="list-thead">
           <tr>
             <th scope="col" class="px-4 py-2">
               作業内容
@@ -26,10 +26,6 @@ const HistoryList = (props: { works: Work[] }) => {
           <For each={props.works}>
             {(work: Work) => {
               const timeDiff = work.end.getTime() - work.start.getTime()
-              // const sec = Math.floor(timeDiff / 1000) % 60
-              // const min = Math.floor(timeDiff / 1000 / 60) % 60
-              // const hours = Math.floor(timeDiff / 1000 / 60 / 60) % 24
-              // const days = Math.floor(timeDiff / 1000 / 60 / 60 / 24)
               const min = Math.floor(timeDiff / 1000 / 60)
               return (
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -41,10 +37,7 @@ const HistoryList = (props: { works: Work[] }) => {
                   </th>
                   <td class="px-4 py-2">{work.start.toLocaleString('ja')}</td>
                   <td class="px-4 py-2">{work.end.toLocaleString('ja')}</td>
-                  <td class="px-4 py-2">
-                    {/* {days}日{hours}時間{min}分{sec}秒 */}
-                    {min}分
-                  </td>
+                  <td class="px-4 py-2">{min}分</td>
                 </tr>
               )
             }}
