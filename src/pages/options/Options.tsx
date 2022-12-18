@@ -74,16 +74,16 @@ const Options = () => {
         </button>
       </Card>
       <Card>
-        <p>ブロック時間：</p>
-        <div>
-          ブロックサイトの追加:
+        {/* <p>ブロック時間：</p> */}
+        <div class="m-4 flex">
           <input
+            class="rounded-l-lg p-2 border-t mr-1 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="ブロックサイトの追加"
             type="text"
             id="new-block-site"
             size="60"
             onChange={handleChange}
           />
-          <button class="p-2 bg-blue-600 text-white" onClick={addBlockSite}>
+          <button class="px-4 rounded-r-lg bg-blue-600  text-white font-bold p-2 uppercase border-blue-600 border-t border-b border-r" onClick={addBlockSite}>
             保存
           </button>
         </div>
