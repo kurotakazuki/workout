@@ -101,7 +101,7 @@ const WorkingTimer = () => {
   return (
     <div>
       <div class="text-xl p-4">
-        {hour()}:{min()}:{sec()}
+        {hour()}時間 {min()}分 {sec()}秒
       </div>
       <div>
         <input
@@ -111,11 +111,17 @@ const WorkingTimer = () => {
           size="60"
           onChange={handleChange}
         />
-      <button 
-        class="px-4 rounded-r-lg bg-blue-600  text-white font-bold p-2 uppercase border-blue-600 border-t border-b border-r"
-        onClick={togglePaused}>
-        {getPaused() ? '休憩中' : '作業中'}
-      </button>
+        <button
+          class="px-4 rounded-r-lg text-white font-bold p-2 uppercase"
+          style={{
+            'background-color': getPaused()
+              ? 'rgb(245, 83, 81)'
+              : 'rgb(167, 227, 132)',
+          }}
+          onClick={togglePaused}
+        >
+          {getPaused() ? '休憩中' : '作業中'}
+        </button>
       </div>
     </div>
   )
