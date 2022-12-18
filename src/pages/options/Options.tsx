@@ -5,10 +5,12 @@ import SiteList from './SiteList'
 import HistoryList from './HistoryList'
 import Card from '@src/components/Card'
 
+export const [getBlockedSites, setBlockedSites] = createSignal<Site[]>([])
+export const [getWorks, setWorks] = createSignal<Work[]>([])
+
 const Options = () => {
   const [getBlockSiteUrl, setBlockSiteUrl] = createSignal<string>('')
-  const [getBlockedSites, setBlockedSites] = createSignal<Site[]>([])
-  const [getWorks, setWorks] = createSignal<Work[]>([])
+
   const handleChange = (event: Event): void => {
     if (!(event.target instanceof HTMLInputElement)) {
       return
