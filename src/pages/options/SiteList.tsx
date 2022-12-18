@@ -29,7 +29,7 @@ const SiteList = (props: { sites: Site[] }) => {
             <th scope="col" class="px-4 py-3">
               URL
             </th>
-            <th scope="col" class="px-4 py-3">
+            <th scope="col" class="px-2 py-3">
               削除
             </th>
           </tr>
