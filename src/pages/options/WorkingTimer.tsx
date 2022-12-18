@@ -100,6 +100,9 @@ const WorkingTimer = () => {
 
   return (
     <div>
+      <div class="text-xl p-4">
+        {hour()}:{min()}:{sec()}
+      </div>
       <div>
         <input
           class="rounded-l-lg p-2 border-t mr-1 border-b border-l text-gray-800 border-gray-200 bg-white"
@@ -108,13 +111,12 @@ const WorkingTimer = () => {
           size="60"
           onChange={handleChange}
         />
-      </div>
-      <div>
-        {hour()}:{min()}:{sec()}
-      </div>
-      <button onClick={togglePaused}>
+      <button 
+        class="px-4 rounded-r-lg bg-blue-600  text-white font-bold p-2 uppercase border-blue-600 border-t border-b border-r"
+        onClick={togglePaused}>
         {getPaused() ? '休憩中' : '作業中'}
       </button>
+      </div>
     </div>
   )
 }
