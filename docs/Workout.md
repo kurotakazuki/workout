@@ -6,7 +6,7 @@ marp: true
 
 ---
 
-# 作業中にYoutubeやtwitterを見ていませんか？
+# 作業中にYouTubeやTwitterを見ていませんか？
 
 ---
 
