@@ -33,6 +33,7 @@
     "vite-plugin-solid": "^2.3.0"
   },
   "dependencies": {
+    "@solid-primitives/timer": "^1.3.4",
     "solid-js": "^1.5.1"
   }
 }

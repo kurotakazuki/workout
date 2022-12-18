@@ -41,16 +41,31 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
       })
     ) {
       chrome.tabs.remove(tabId)
-      //   tab.mutedInfo = true
-      //   console.log('blocked site')
-      //   chrome.windows.get(tab.windowId, (win) => {
-      //     if (win.confirm('このサイトは現在閲覧できません。\n削除しますか？')) {
-      //       chrome.tabs.remove(tabId)
-      //     }
-      //   })
+      // tab.mutedInfo = false
     }
   })
 })
+
+// changed storage
+chrome.storage.onChanged.addListener((changes, namespace) => {
+  for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
+    console.log(
+      `Storage key "${key}" in namespace "${namespace}" changed.`,
+      `Old value was "${oldValue}", new value is "${newValue}".`
+    )
+
+    // local
+    // if (namespace === 'local') {
+    //   // working
+    //   if (key === 'working') {
+    //     if (working) {
+    //     } else {
+    //     }
+    //   }
+    // }
+  }
+})
+
 // alarm
 // chrome.alarms.onAlarm.addListener((alarm) => {
 //   chrome.storage.local.set({ working: false })

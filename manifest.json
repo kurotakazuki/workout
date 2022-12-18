@@ -3,7 +3,9 @@
   "name": "Workout",
   "version": "1.0.0",
   "permissions": ["storage", "tabs", "alarms"],
-  "action": { "default_popup": "index.html" },
+  "action": {
+    "default_popup": "src/pages/popup/index.html"
+  },
   "background": { "service_worker": "src/pages/background/index.ts" },
   "options_page": "src/pages/options/index.html"
 
