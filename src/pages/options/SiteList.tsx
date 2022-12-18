@@ -4,44 +4,53 @@ import { setBlockedSites } from './Options'
 
 const SiteList = (props: { sites: Site[] }) => {
   const deleteBlockSite = (site: Site) => {
-      chrome.storage.local.get(
-        'blockedSites',
-        ({ blockedSites }: { blockedSites: Site[] }) => {
-          blockedSites = blockedSites.filter((currSite) => {
-            if (currSite.url !== site.url) {
-              return currSite
-            }
-          })
-          chrome.storage.local.set({ blockedSites })
-          setBlockedSites(blockedSites)
-        }
-      )
+    chrome.storage.local.get(
+      'blockedSites',
+      ({ blockedSites }: { blockedSites: Site[] }) => {
+        blockedSites = blockedSites.filter((currSite) => {
+          if (currSite.url !== site.url) {
+            return currSite
+          }
+        })
+        chrome.storage.local.set({ blockedSites })
+        setBlockedSites(blockedSites)
+      }
+    )
   }
-  
+
   return (
     <div>
-      <table class="table table-auto">
-        <thead>
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th>ID</th>
-            <th>サイト名</th>
-            <th>URL</th>
+            <th scope="col" class="px-1 py-3">
+              ID
+            </th>
+            <th scope="col" class="px-4 py-3">
+              サイト名
+            </th>
+            <th scope="col" class="px-4 py-3">
+              URL
+            </th>
+            <th scope="col" class="px-4 py-3">
+              削除
+            </th>
           </tr>
         </thead>
         <tbody>
           <For each={props.sites}>
             {(site: Site, i) => (
-              <tr>
-                <td>{i}</td>
-                <td>{site.name}</td>
-                <td>{site.url}</td>
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td class="px-1 py-2">{i}</td>
+                <td class="px-4 py-2">{site.name}</td>
+                <td class="px-4 py-2">{site.url}</td>
                 <td>
-                <button
-                  class="p-2 bg-blue-600 text-white"
-                  onClick={()=>deleteBlockSite(site)}
-                >
-                  削除
-                </button>
+                  <span
+                    class={'material-symbols-outlined hover:text-blue-600 rounded-full'}
+                    onClick={() => deleteBlockSite(site)}
+                  >
+                    delete
+                  </span>
                 </td>
               </tr>
             )}
