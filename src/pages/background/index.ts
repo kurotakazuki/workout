@@ -1,23 +1,30 @@
 import { Site } from '@src/models/sites'
-import { Work } from '@src/models/works'
+import { WorkString } from '@src/models/works'
 
 // initialization
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.local.get(['blockedSites', 'working'], (local) => {
-    if (local.blockedSites === undefined) {
-      const blockedSites: Site[] = [
-        {
-          name: 'youtube',
-          url: 'https://www.youtube.com/',
-        },
-      ]
-      chrome.storage.local.set({ blockedSites })
+  chrome.storage.local.get(
+    ['blockedSites', 'workHistory', 'working'],
+    (local) => {
+      if (local.blockedSites === undefined) {
+        const blockedSites: Site[] = [
+          {
+            name: 'youtube',
+            url: 'https://www.youtube.com/',
+          },
+        ]
+        chrome.storage.local.set({ blockedSites })
+      }
+      if (local.workHistory === undefined) {
+        const workHistory: WorkString[] = []
+        chrome.storage.local.set({ workHistory })
+      }
+      if (local.working === undefined) {
+        const working = false
+        chrome.storage.local.set({ working })
+      }
     }
-    if (local.working === undefined) {
-      const working = false
-      chrome.storage.local.set({ working })
-    }
-  })
+  )
 })
 
 // onUpdated tabs
