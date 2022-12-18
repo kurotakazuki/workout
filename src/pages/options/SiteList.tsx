@@ -8,14 +8,14 @@ const SiteList = (props: { sites: Site[] }) => {
         'blockedSites',
         ({ blockedSites }: { blockedSites: Site[] }) => {
           blockedSites = blockedSites.filter((currSite) => {
-            if (currSite !== site) {
+            if (currSite.url !== site.url) {
               return currSite
             }
           })
+          chrome.storage.local.set({ blockedSites })
+          setBlockedSites(blockedSites)
         }
       )
-      chrome.storage.local.set({ blockedSites })
-      setBlockedSites(blockedSites)
   }
   
   return (
@@ -35,12 +35,14 @@ const SiteList = (props: { sites: Site[] }) => {
                 <td>{i}</td>
                 <td>{site.name}</td>
                 <td>{site.url}</td>
+                <td>
                 <button
                   class="p-2 bg-blue-600 text-white"
                   onClick={()=>deleteBlockSite(site)}
                 >
                   削除
                 </button>
+                </td>
               </tr>
             )}
           </For>
