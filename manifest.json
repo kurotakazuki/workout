@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Workout",
+  "name": "eternal-work",
   "version": "1.0.0",
   "permissions": ["storage", "tabs", "alarms"],
   "action": {
